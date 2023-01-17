@@ -12,6 +12,7 @@
           "Microsoft.AspNetCore.OpenApi": "7.0.1",
           "Microsoft.EntityFrameworkCore": "7.0.2",
           "Microsoft.EntityFrameworkCore.Design": "7.0.2",
+          "Microsoft.EntityFrameworkCore.InMemory": "7.0.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.2",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.17.0",
           "Swashbuckle.AspNetCore": "6.4.0"
@@ -188,6 +189,17 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {
+            "assemblyVersion": "7.0.2.0",
+            "fileVersion": "7.0.222.58006"
+          }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.InMemory/7.0.2": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.2"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
             "assemblyVersion": "7.0.2.0",
             "fileVersion": "7.0.222.58006"
           }
@@ -777,6 +789,13 @@
       "sha512": "sha512-gUUucCoJci8BBxOcU/XuuldUZpCo5Od8lwFEzZ5WywnvDfSmARnXNe97BpjL+JiBhSrnuTxW/wCJjWqPonXXHQ==",
       "path": "microsoft.entityframeworkcore.design/7.0.2",
       "hashPath": "microsoft.entityframeworkcore.design.7.0.2.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/7.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LmkEuuNxkC//OInidXb8ebD5WfJ9cAFfNPUrkNI4FRP0GAHLQcpRO43pobWCHPbKpmJkGMB7YlqXcWtfOEMRdQ==",
+      "path": "microsoft.entityframeworkcore.inmemory/7.0.2",
+      "hashPath": "microsoft.entityframeworkcore.inmemory.7.0.2.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/7.0.2": {
       "type": "package",

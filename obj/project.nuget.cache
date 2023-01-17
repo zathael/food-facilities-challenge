@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZarLGz1qzyl7i2r9CxZCxXNgtAgOKLYYeS0GPN4rAAoOUPV+XcDlJJEBHTlOw0WduME+hAAQN6d2+JfuaFbSGw==",
+  "dgSpecHash": "a1Av8XLFzFbx7xkpI0AwLCY2VUishElfFCf5VDaX/hgJan5tXzrLhdYwqPpR8ESIelJMTZc+E+jsJqxecR1xSg==",
   "success": true,
   "projectFilePath": "C:\\repos\\interviews\\food-facilities-challenge\\FoodFacilities.Api\\FoodFacilities.Api.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\floh\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.2\\microsoft.entityframeworkcore.abstractions.7.0.2.nupkg.sha512",
     "C:\\Users\\floh\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.2\\microsoft.entityframeworkcore.analyzers.7.0.2.nupkg.sha512",
     "C:\\Users\\floh\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.2\\microsoft.entityframeworkcore.design.7.0.2.nupkg.sha512",
+    "C:\\Users\\floh\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.2\\microsoft.entityframeworkcore.inmemory.7.0.2.nupkg.sha512",
     "C:\\Users\\floh\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.2\\microsoft.entityframeworkcore.relational.7.0.2.nupkg.sha512",
     "C:\\Users\\floh\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.2\\microsoft.entityframeworkcore.sqlserver.7.0.2.nupkg.sha512",
     "C:\\Users\\floh\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

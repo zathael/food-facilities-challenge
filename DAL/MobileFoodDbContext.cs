@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using CsvHelper.Configuration;
 using FoodFacilities.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -10,7 +11,13 @@ namespace FoodFacilities.Api.DAL
     /// </summary>
     public class MobileFoodDbContext : DbContext
     {
-        public DbSet<MobileFoodFacility> mobileFoodFacilities { get; set; }
+        public DbSet<MobileFoodFacility> MobileFoodFacilities { get; set; }
+
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseInMemoryDatabase(databaseName: "MobileFoodFacilities");
+        }
 
         /// <summary>
         /// Loads the MobileFoodFacility data from the CSV file
@@ -20,14 +27,19 @@ namespace FoodFacilities.Api.DAL
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            using (var reader = new StreamReader("DAL\\MobileFoodFacility.csv"))
+            modelBuilder.Entity<MobileFoodFacility>().ToTable("MobileFoodFacilities");
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-                {
-                    var records = csv.GetRecords<MobileFoodFacility>();
-                    modelBuilder.Entity<MobileFoodFacility>().HasData(records);
-                }
-            }
+                Delimiter = ",",
+            };
+
+            var records = new List<MobileFoodFacility>();
+
+            using (var reader = new StreamReader("DAL/Mobile_Food_Facility_Permit.csv"))
+            using (var csv = new CsvReader(reader, config))
+            records = csv.GetRecords<MobileFoodFacility>().ToList();                            
+            
+            modelBuilder.Entity<MobileFoodFacility>().HasData(records);
         }
     }
 }
