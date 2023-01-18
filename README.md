@@ -89,8 +89,8 @@ MobileFoodFacilitiesController services these endpoints in the following ways
 5. Additional Notes
 	- We append Async to all of these so when we generate the library, the consumer knows what's async
 	- ProducesResponseType manages the responses nicely for the DOM usually
----
-Problems with the Implementation:
+
+# Problems with the Implementation:
 1. Security
 	- Didn't spend time writing up a header to auth into the controller because this is public information
 	- no delimiting on a user writing a bot to hit us, so hope you have Cloudflare or consider adding an Auth Token (OAuth2 is not hard)
@@ -107,8 +107,10 @@ Problems with the Implementation:
 6. Naming
 	- Mobile Food Facility is a cumbersome class name
 	- Named the project FoodFacilities while it's MobileFoodFacilities. Oops. Not a terrible refactor.
----
-Time Spent:
+7. Git History	
+	- as a Dev, I don't compartmentalize my commits & instead rely on PR squashing with a branch. Locally, this get a little messy.
+ 
+# Time Spent:
 - Git History should reveal the general time spent.
 	- ~1 hour on setup and Model defining
 	- ~2 hours to define controller and get entityframeworkcore to behave with the csv
@@ -116,18 +118,20 @@ Time Spent:
 	- ~1.5 hours writing this Readme!
 	- ~2 hours on Unit Testing with this weird local DbContext
 
----
 
-Response to Questions
-	1. What would I have done different if I had spent more time on this?
-		- Actually stood up a database instead of learning how to load up a csv in the new entity framework's language
-		- implement some authorization so the container doesn't explode from requests
-	2. What are the trade-offs I have made?
-		- a trade-off on the User Name search is that, if looking for two users of the same name but different capitalization, you will struggle to get the correct one. I don't believe this was a use-case.
-		- in my haste, may have left a spare library or two around or a dangling using case. No ReSharper to do my job for me haha
-	3. What did I leave out?
-		- meaningful unit testing, as getting a fake database to work is useful time on a robust accurate system but not here.
-	4. What would I solve to scale for a large number of users?
-		- Implement a Search Index (Azure has a decent one but the OData query language is unique) for autocomplete
-		- This is an API so you can have a site that services the users and contacts the API for that data (MICROSERVICE ARCHITECTURE)
 
+# Response to Questions
+1. What would I have done different if I had spent more time on this?
+	- Actually stood up a database instead of learning how to load up a csv in the new entity framework's language
+	- implement some authorization so the container doesn't explode from requests
+2. What are the trade-offs I have made?
+	- a trade-off on the User Name search is that, if looking for two users of the same name but different capitalization, you will struggle to get the correct one. I don't believe this was a use-case.
+	- in my haste, may have left a spare library or two around or a dangling using case. No ReSharper to do my job for me haha
+3. What did I leave out?
+	- meaningful unit testing, as getting a fake database to work is useful time on a robust accurate system but not here.
+4. What would I solve to scale for a large number of users?
+	- Implement a Search Index (Azure has a decent one but the OData query language is unique) for autocomplete
+	- This is an API so you can have a site that services the users and contacts the API for that data (MICROSERVICE ARCHITECTURE)
+
+# Final Comments
+Reach out if you have any questions or business inquiries!
