@@ -1,10 +1,11 @@
-﻿using FoodFacilities.Api.DAL;
+﻿using FoodFacilities.Api.v1.DAL;
+using FoodFacilities.Api.v1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace FoodFacilities.Api.Controllers
+namespace FoodFacilities.Api.v1.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1/api/[controller]")]
     [ApiController]
     public class MobileFoodFacilitiesController : ControllerBase
     {
@@ -23,7 +24,7 @@ namespace FoodFacilities.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet(Name = "GetAllMobileFoodVendorsAsync")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MobileFoodFacility>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllMobileFoodVendorsAsync()
         {
@@ -40,7 +41,7 @@ namespace FoodFacilities.Api.Controllers
         /// <param name="status"></param>
         /// <returns></returns>
         [HttpGet("search/{name}", Name = "SearchMobileFoodVendorsByNameAsync")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MobileFoodFacility),StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> SearchMobileFoodVendorsByNameAsync(string name, string status = "")
@@ -49,7 +50,7 @@ namespace FoodFacilities.Api.Controllers
                .Where(m =>
                    // compare only lowercase to lowercase names for easier searching
                    m.Applicant.ToLower().Contains(name.ToLower())).ToListAsync();
-            
+
             // dev note: I'd rather avoid this via ternanry operator in the LINQ query, but FirstOrDefaultAsync is being tricky.
             //           I'm sure there's a cleaner better way to do this, but I'm not spending more time on this.
             if (!string.IsNullOrWhiteSpace(status))
@@ -57,7 +58,7 @@ namespace FoodFacilities.Api.Controllers
                 var vendorWithStatus = mobileFoodVendors.FirstOrDefault(m =>
                     // comparing lowercase for consistency despite data format being CAPS
                     m.Status.ToLower().Contains(status.ToLower()));
-                
+
 
                 if (vendorWithStatus == null)
                 {
@@ -84,7 +85,7 @@ namespace FoodFacilities.Api.Controllers
         /// <param name="address"></param>
         /// <returns></returns>
         [HttpGet("street/{address}", Name = "SearchMobileFoodVendorsByAddressAsync")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MobileFoodFacility), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> SearchMobileFoodVendorsByAddressAsync(string address)
@@ -112,7 +113,7 @@ namespace FoodFacilities.Api.Controllers
         /// <param name="longitude"></param>
         /// <returns></returns>
         [HttpPost("location", Name = "SearchMobileFoodVendorsByLocationAsync")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MobileFoodFacility>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> SearchMobileFoodVendorsByLocationAsync(double latitude, double longitude, string status = "APPROVED")

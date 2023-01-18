@@ -1,7 +1,7 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace FoodFacilities.Api.Models
+namespace FoodFacilities.Api.v1.Models
 {
     /// <summary>
     /// MobileFoodFacility describes a vendor, location, their food and details of their permit.
@@ -46,7 +46,7 @@ namespace FoodFacilities.Api.Models
         /// Block Id
         /// dev note: sometimes this is blank! would be an int but staying as a string now
         /// </summary>
-        [Name("block")]        
+        [Name("block")]
         public string? Block { get; set; }
         /// <summary>
         /// Lot Id

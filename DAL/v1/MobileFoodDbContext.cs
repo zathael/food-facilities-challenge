@@ -1,10 +1,10 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
-using FoodFacilities.Api.Models;
+using FoodFacilities.Api.v1.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
-namespace FoodFacilities.Api.DAL
+namespace FoodFacilities.Api.v1.DAL
 {
     /// <summary>
     /// DBContext for MobileFoodFacilities
@@ -13,7 +13,16 @@ namespace FoodFacilities.Api.DAL
     {
         public DbSet<MobileFoodFacility> MobileFoodFacilities { get; set; }
 
+        public MobileFoodDbContext()
+        {
+        }
+
+        public MobileFoodDbContext(DbContextOptions<MobileFoodDbContext> options)
+            : base(options)
+        {
+        }
         
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseInMemoryDatabase(databaseName: "MobileFoodFacilities");
@@ -35,10 +44,10 @@ namespace FoodFacilities.Api.DAL
 
             var records = new List<MobileFoodFacility>();
 
-            using (var reader = new StreamReader("DAL/Mobile_Food_Facility_Permit.csv"))
+            using (var reader = new StreamReader("DAL/v1/Mobile_Food_Facility_Permit.csv"))
             using (var csv = new CsvReader(reader, config))
-            records = csv.GetRecords<MobileFoodFacility>().ToList();                            
-            
+                records = csv.GetRecords<MobileFoodFacility>().ToList();
+
             modelBuilder.Entity<MobileFoodFacility>().HasData(records);
         }
     }

@@ -1,6 +1,4 @@
-using FoodFacilities.Api.DAL;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting.Internal;
+using FoodFacilities.Api.v1.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,11 +29,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Get the DbContext
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<MobileFoodDbContext>();
-    context.Database.EnsureCreated();
+    context.Database.EnsureCreated(); // Use .EnsureCreated() because we're only running OnModelCreating
 }
 
 app.Run();

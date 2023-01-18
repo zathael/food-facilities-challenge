@@ -1,15 +1,17 @@
 # MobileFoodFacility.Api
-A .NET 7 Web Api to navigate mobile food vendor data
+A .NET 7 Web Api to navigate mobile food vendor data.
+
+This was coded as part of a technical assessment, done in about a day's worth of work.
 
 # Prereqs
-- Docker
 - Dotnet 7
+- Docker (if you're going to dockerize)
 
 # Technologies
 - Entity Framework Core for Data Seeding https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding
 - CsvHelper for CSV Parsing https://joshclose.github.io/CsvHelper/ (apache license + MS-PL license)
-- Swashbuckle for Swagger Generation, API Standup, and general cross-language usefulness
-
+- Swashbuckle for Swagger Generation, Library Documentation, and general cross-language usefulness
+- FakeItEasy to make Unit Testing...Easy!
 # Running the Project
 
 Option A: Just run it
@@ -19,19 +21,29 @@ Option B: Docker
 - `docker compose .` to build the dockerfile, and then make sure you deploy to your container properly! 
 - If you can't deploy it from here, talk to me for some Docker lessons.
 
-*You can use `dotnet swagger tofile` after `dotnet build`ing the project to generate an OpenApi-consumable swagger.json*
+## Extras
+
+1. Swashbuckle Code Generation
+	- first, install the tool 
+	  - `dotnet tool install --global Swashbuckle.AspnetCore.Cli`
+	  - *if the tool stops working, do `dotnet tool restore`*
+	  - clean and build so you have a .dll
+	 - You can use `swagger tofile` after `dotnet build`ing the project to generate an OpenApi-consumable swagger.json*
+	 	- ex: `swagger tofile --output swagger.json bin/Debug/net7.0/FoodFacilities.Api.dll v1`
+
+*You can `dotnet test` to run the unit tests! Check PROBLEMS.5 to see why the unit tests look the way they do.*
 
 # Technical Discussion
 
-This API was coded following the instructions of **README_original.md** at the hands of an intelligent user.
+This API was coded following the instructions of **README_original-prompt.md** at the hands of an intelligent user.
 
 This API services the data on the Mobile Food Facilities by allowing users to search for vendors by name, address, or lat/long. There were a few requests to include "status" as a field.
 
 As part of beng an API, it required the following things:
-	1. Endpoints
-		- .NET 7 was selected to show off the latest and greatest, linked with library generation so you don't have to recode classes between projects.
-	2. A database
-		- Reference provided CSV DAL/Mobile_Food_Facility_Permit.csv for the data that was used to seed the database. This CSV contained extra fields not present on the original datasheet  (https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat/data)
+1. Endpoints
+	- .NET 7 was selected to show off the latest and greatest, linked with library generation so you don't have to recode classes between projects.
+2. A database
+	- Reference provided CSV DAL/Mobile_Food_Facility_Permit.csv for the data that was used to seed the database. This CSV contained extra fields not present on the original datasheet  (https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat/data)
 
 This project can be run as standard or with the included Dockerfile. 
 	- Included is some code that references how you would use this API to generate a consumable swagger.json as part of the docker process, which is useful when you eventually update your API.
@@ -86,11 +98,36 @@ Problems with the Implementation:
 	- A lot of these endpoints look like they're going to be in someone's `<input>` and we'll have to eat a request for every character input. You won't want to tie up the DB that way, should use a Search Index.
 3. Data Model
 	- Designed MobileFoodFacility.cs to handle this, but the data has a lot of inconsistencies in it. Check out the "dev note"s. We result to string a lot.
-
+4. Versioning
+	- Basic versioning was added for namespaces & swagger documentation, can be managed in other ways
+5. Unit Testing
+	- Could not consume the local csv correctly, so unit tests do very little right now other than show objects can be created.
+	- a Todo was added
+	- Did not spend extra time scaffolding integration/unit testing beyond a basic positive/negative test
+6. Naming
+	- Mobile Food Facility is a cumbersome class name
+	- Named the project FoodFacilities while it's MobileFoodFacilities. Oops. Not a terrible refactor.
 ---
 Time Spent:
 - Git History should reveal the general time spent.
 	- ~1 hour on setup and Model defining
-	- ~2 hours to define controller get entityframeworkcore to behave with the csv
+	- ~2 hours to define controller and get entityframeworkcore to behave with the csv
 	- ~1 hour functional testing to discover bad data entries
-	- ~1 hour writing this Readme!
+	- ~1.5 hours writing this Readme!
+	- ~2 hours on Unit Testing with this weird local DbContext
+
+---
+
+Response to Questions
+	1. What would I have done different if I had spent more time on this?
+		- Actually stood up a database instead of learning how to load up a csv in the new entity framework's language
+		- implement some authorization so the container doesn't explode from requests
+	2. What are the trade-offs I have made?
+		- a trade-off on the User Name search is that, if looking for two users of the same name but different capitalization, you will struggle to get the correct one. I don't believe this was a use-case.
+		- in my haste, may have left a spare library or two around or a dangling using case. No ReSharper to do my job for me haha
+	3. What did I leave out?
+		- meaningful unit testing, as getting a fake database to work is useful time on a robust accurate system but not here.
+	4. What would I solve to scale for a large number of users?
+		- Implement a Search Index (Azure has a decent one but the OData query language is unique) for autocomplete
+		- This is an API so you can have a site that services the users and contacts the API for that data (MICROSERVICE ARCHITECTURE)
+
