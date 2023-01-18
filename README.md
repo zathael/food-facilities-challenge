@@ -17,10 +17,14 @@ This was coded as part of a technical assessment, done in about a day's worth of
 
 Option A: Just run it
 - `dotnet run` should get you started without issue.
+	- I used `dotnet run --launch-profile "https"`
 
 Option B: Docker
 - `docker compose .` to build the dockerfile, and then make sure you deploy to your container properly! 
 - If you can't deploy it from here, talk to me for some Docker lessons.
+
+**You can access the Web API Gui for easy Testing via navigating to /swagger/index.html**
+ex: https://localhost:7055/swagger/index.html
 
 ## Extras
 
