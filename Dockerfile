@@ -16,6 +16,11 @@ RUN dotnet build "FoodFacilities.Api.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "FoodFacilities.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
+# dev note: Did you know that this dockerfile can service a library, and export it via NPM?
+#			You can even choose the language.
+# RUN dotnet swagger tofile --output "FoodFacilities/generated/swagger.json" "FoodFacilities.Api/bin/Debug/net7.0/.dll" v1 generates your needed swagger.json file
+# Ask me more if you're curious as this is not in scope & is not designed to work if you just uncomment it
+
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .

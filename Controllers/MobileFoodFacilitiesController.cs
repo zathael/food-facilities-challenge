@@ -22,10 +22,10 @@ namespace FoodFacilities.Api.Controllers
         /// dev note 2: limited to top 20. don't hammer this, we don't paginate!
         /// </summary>
         /// <returns></returns>
-        [HttpGet(Name = "GetAllMobileFoodVendors")]
+        [HttpGet(Name = "GetAllMobileFoodVendorsAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAllMobileFoodVendors()
+        public async Task<IActionResult> GetAllMobileFoodVendorsAsync()
         {
             var mobileFoodVendors = await _mobileFoodDbContext.MobileFoodFacilities.ToListAsync();
             return Ok(mobileFoodVendors.Take(20));
@@ -39,11 +39,11 @@ namespace FoodFacilities.Api.Controllers
         /// <param name="name"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        [HttpGet("search/{name}", Name = "SearchMobileFoodVendorsByName")]
+        [HttpGet("search/{name}", Name = "SearchMobileFoodVendorsByNameAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SearchMobileFoodVendorsByName(string name, string status = "")
+        public async Task<IActionResult> SearchMobileFoodVendorsByNameAsync(string name, string status = "")
         {
             var mobileFoodVendors = await _mobileFoodDbContext.MobileFoodFacilities
                .Where(m =>
@@ -83,11 +83,11 @@ namespace FoodFacilities.Api.Controllers
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        [HttpGet("street/{address}", Name = "SearchMobileFoodVendorsByAddress")]
+        [HttpGet("street/{address}", Name = "SearchMobileFoodVendorsByAddressAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SearchMobileFoodVendorsByAddress(string address)
+        public async Task<IActionResult> SearchMobileFoodVendorsByAddressAsync(string address)
         {
             var mobileFoodVendor = await _mobileFoodDbContext.MobileFoodFacilities
                 .FirstOrDefaultAsync(m =>
@@ -111,11 +111,11 @@ namespace FoodFacilities.Api.Controllers
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns></returns>
-        [HttpPost("location", Name = "SearchMobileFoodVendorsByLocation")]
+        [HttpPost("location", Name = "SearchMobileFoodVendorsByLocationAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SearchMobileFoodVendorsByLocation(double latitude, double longitude, string status = "APPROVED")
+        public async Task<IActionResult> SearchMobileFoodVendorsByLocationAsync(double latitude, double longitude, string status = "APPROVED")
         {
             // search within 0.05 miles latitude 
             var latitudeVendors = await _mobileFoodDbContext.MobileFoodFacilities
