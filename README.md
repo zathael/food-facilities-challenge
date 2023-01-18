@@ -122,6 +122,7 @@ MobileFoodFacilitiesController services these endpoints in the following ways
 	- ~1 hour functional testing to discover bad data entries
 	- ~1.5 hours writing this Readme!
 	- ~2 hours on Unit Testing with this weird local DbContext
+	- +1 hour post-mortem Linux Bug fix
 
 
 
