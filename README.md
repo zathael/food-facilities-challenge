@@ -1,4 +1,4 @@
-# MobileFoodFacility.Api
+# FoodFacilities.Api
 A .NET 7 Web Api to navigate mobile food vendor data.
 
 This was coded as part of a technical assessment, done in about a day's worth of work.
@@ -6,6 +6,7 @@ This was coded as part of a technical assessment, done in about a day's worth of
 # Prereqs
 - Dotnet 7
 - Docker (if you're going to dockerize)
+- Swashbuckle (if you're doing any extras)
 
 # Technologies
 - Entity Framework Core for Data Seeding https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding
