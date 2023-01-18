@@ -44,7 +44,9 @@ namespace FoodFacilities.Api.v1.DAL
 
             var records = new List<MobileFoodFacility>();
 
-            using (var reader = new StreamReader("DAL/v1/Mobile_Food_Facility_Permit.csv"))
+            var csvLocation = Path.Combine(Directory.GetCurrentDirectory(), "DAL", "v1", "Mobile_Food_Facility_Permit.csv");
+
+            using (var reader = new StreamReader(csvLocation))
             using (var csv = new CsvReader(reader, config))
                 records = csv.GetRecords<MobileFoodFacility>().ToList();
 

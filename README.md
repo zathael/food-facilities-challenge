@@ -20,8 +20,8 @@ Option A: Just run it
 	- I used `dotnet run --launch-profile "https"`
 
 Option B: Docker
-- `docker compose .` to build the dockerfile, and then make sure you deploy to your container properly! 
-- If you can't deploy it from here, talk to me for some Docker lessons.
+- `docker build .` to build the dockerfile, and then make sure you deploy to your container properly! 
+- Remember to specify ports, or use a pipeline to handle it for you
 
 **You can access the Web API Gui for easy Testing via navigating to /swagger/index.html**
 ex: https://localhost:7055/swagger/index.html
@@ -140,3 +140,8 @@ MobileFoodFacilitiesController services these endpoints in the following ways
 
 # Final Comments
 Reach out if you have any questions or business inquiries!
+
+# Post-Mortem
+Discovered when running the Docker Image, it doesn't port the .csv correct when run outside of visual studio's docker thing.
+
+This was because it doesn't originally take the .csv with it when we publish.

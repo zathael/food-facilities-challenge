@@ -14,6 +14,12 @@ WORKDIR "/src/."
 RUN dotnet build "FoodFacilities.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
+
+### Post-Mortem Bugifx: ADD CSV TO DOCKER FILE
+run mkdir "bin/Release/net7.0/DAL/v1" -p
+RUN cp "DAL/v1/Mobile_Food_Facility_Permit.csv" "bin/Release/net7.0/DAL/v1/Mobile_Food_Facility_Permit.csv"
+### DONE ADDING CSV TO DOCKER FILE
+
 RUN dotnet publish "FoodFacilities.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # dev note: Did you know that this dockerfile can service a library, and export it via NPM?
